@@ -331,7 +331,7 @@ function LearningPath({
   // return public;
 }
 
-function Students({
+function Student({
   name = requiredParam("name"),
   email = requiredParam("email"),
   age,
@@ -352,17 +352,31 @@ function Students({
     facebook,     
   }
 
-  if (isArray(learningPaths)) {
-    this.learningPaths = [];
+  const private = {
+    "_learningPaths": [],
+  };
 
+  Object.defineProperty(this, "learningPaths", {
+    get() {
+      return private["_learningPaths"];
+    },
+    set(newLP) {
+        if ( newLP instanceof LearningPath) {
+          private["_learningPaths"].push(newLP);    
+        } else {
+          console.warn("Alguno de los LPs no es una instancia del prototipo LearningPath");
+        }
+      },
+  });
+
+
+/*   if (isArray(learningPaths)) {
+    this._learningPaths = [];
+ */
     for (learningPathIndex in learningPaths) {
-      if (learningPaths[learningPathIndex] instanceof LearningPath) {
-        this.learningPaths.push(learningPaths[learningPathIndex]);    
-      }
+      this.learningPaths = learningPaths[learningPathIndex]
     }
-  }
-
-
+/*   } */
   // const private = {
   //   "_name": name,
   //   "_learningPaths": learningPaths,
@@ -417,11 +431,15 @@ function Students({
   // return public;
 }
 
+
+
+
+
 const escuelaWeb = new LearningPath({
   name: "Escuela de desarrollo web",
 }); //{}
 
-const Lautaro = new Students({
+const Lautaro = new Student({
   name: "Lautaro",
   email: "kjnsakad@ñ,d.com",
   age: 19,
