@@ -48,7 +48,7 @@ Object.freeze(Lautaro); //nos impide borrar y editar
 
 console.log(Object.getOwnPropertyDescriptors(Lautaro)); */
 
-/* const obj1 = {
+const obj1 = {
   a: "a",
   b: "b",
   c: {
@@ -60,12 +60,52 @@ console.log(Object.getOwnPropertyDescriptors(Lautaro)); */
   }
 };
 
-const stringifiedComplexObj = JSON.stringify(obj1);
+function isObject(subject) {
+  return typeof subject == "object";
+}
+
+function isArray(subject) {
+  return Array.isArray(subject);
+}
+
+function deepCopy(subject) {
+  let copySubject;
+
+  const subjectIsObject = isObject(subject);
+  const subjectIsArray = isArray(subject);
+
+
+  if (subjectIsArray) {
+    copySubject = [];
+  } else if (subjectIsObject) {
+    copySubject = {};
+  }else {
+    return subject;
+  }
+
+  for (key in subject) {
+    const keyIsObject = isObject(subject[key]);
+
+    if (keyIsObject) {
+      // copySubject[key] = deepCopy(subject[key]);
+    } else {
+      if (subjectIsArray) {
+        copySubject.push(subject[key])
+      } else {
+        copySubject[key] = subject[key];
+      }
+    }
+  }
+
+  return copySubject;
+}
+
+/* const stringifiedComplexObj = JSON.stringify(obj1);
 const obj = JSON.parse(obj1);
 console.log(stringifiedComplexObj);
 console.log(obj);
- */
-/* for (prop in obj1) {
+
+for (prop in obj1) {
   obj2[prop] = obj1[prop];
 } */
 
@@ -76,13 +116,13 @@ const obj4 = Object.create(obj1) //el objeto se copio dentro de PROTO
 
 // function recursiva() {
 //   if (/* validacion */) {
-      // llamados recursivos
+//       llamados recursivos
 //   } else {
-      // llamados normales, sin recursividad
+//       llamados normales, sin recursividad
 //   }
 // }
 
-const numeritos = [0,1,2,3,4,5,6,7,8,9,0,0,2];
+// const numeritos = [0,1,2,3,4,5,6,7,8,9,0,0,2];
 // let numerito = 0;
 
 // for (let index = 0; index < numeritos.length; index++) {
@@ -90,13 +130,12 @@ const numeritos = [0,1,2,3,4,5,6,7,8,9,0,0,2];
 //   console.log({ index, numerito });
 // }
 
-function recursiva(numberArray) {
+/* function recursiva(numberArray) {
   if (numberArray.length != 0) {
     const firstNum = numberArray[0];
     console.log(firstNum);
-    
+
     numberArray.shift();
     recursiva(numberArray);
   }
-
-}
+} */
