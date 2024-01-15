@@ -100,21 +100,59 @@ function deepCopy(subject) {
   return copySubject;
 }
 
-const studentsBase = {
-  name: undefined,
-  email: undefined,
-  age: undefined,
-  approvedCourses: undefined,
-  learningPaths: undefined,
-  socialMedia: {
-    X: undefined,
-    instagram: undefined,
-    facebook: undefined,
-  },
-};
+// const studentsBase = {
+//   name: undefined,
+//   email: undefined,
+//   age: undefined,
+//   approvedCourses: undefined,
+//   learningPaths: undefined,
+//   socialMedia: {
+//     X: undefined,
+//     instagram: undefined,
+//     facebook: undefined,
+//   },
+// };
 
-const Lautaro = deepCopy(studentsBase);
-Object.seal(Lautaro);
+function requiredParam(param) {
+  throw new Error(param + " es obligatorio");
+} 
+
+function createStudents({
+  name = requiredParam("name"),
+  email = requiredParam("email"),
+  age,
+  x,
+  instagram,
+  facebook,
+  approvedCourses = [],
+  learningPaths = [],
+} = {}) {
+  return {
+    name,
+    email,
+    age,
+    socialMedia: {
+          x,
+          instagram,
+          facebook,
+    },
+    approvedCourses ,
+    learningPaths ,
+  }
+}
+
+const Lautaro = createStudents({
+  name: "Lautaro",
+  email: "kjnsakad@ñ,d.com",
+  age: 19,
+  x: "elTaro",
+  instagram: "lautiii.321",
+  facebook: "Lauti Bj",
+  approvedCourses:"Curso de las POO"
+}); //{}
+
+/* const Lautaro = deepCopy(studentsBase);
+Object.seal(Lautaro); */
 // Object.isSealed(Lautaro);
 // Object.defineProperty(Lautaro, "name", {
 //   value: "Lautarito",
