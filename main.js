@@ -48,19 +48,55 @@ Object.freeze(Lautaro); //nos impide borrar y editar
 
 console.log(Object.getOwnPropertyDescriptors(Lautaro)); */
 
-const obj1 = {
+/* const obj1 = {
   a: "a",
   b: "b",
   c: {
     d: "d",
     e: "e",
+  },
+  editA() {
+    this.a = "AAAAA";
   }
 };
 
-const obj2 = {};
-for (prop in obj1) {
+const stringifiedComplexObj = JSON.stringify(obj1);
+const obj = JSON.parse(obj1);
+console.log(stringifiedComplexObj);
+console.log(obj);
+ */
+/* for (prop in obj1) {
   obj2[prop] = obj1[prop];
-}
+} */
 
-const obj3 = Object.assign({}, obj1)
-const obj4 = Object.create(obj1)
+/* const obj3 = Object.assign({}, obj1)
+const obj4 = Object.create(obj1) //el objeto se copio dentro de PROTO
+ */
+
+
+// function recursiva() {
+//   if (/* validacion */) {
+      // llamados recursivos
+//   } else {
+      // llamados normales, sin recursividad
+//   }
+// }
+
+const numeritos = [0,1,2,3,4,5,6,7,8,9,0,0,2];
+// let numerito = 0;
+
+// for (let index = 0; index < numeritos.length; index++) {
+//   numerito = numeritos[index];
+//   console.log({ index, numerito });
+// }
+
+function recursiva(numberArray) {
+  if (numberArray.length != 0) {
+    const firstNum = numberArray[0];
+    console.log(firstNum);
+    
+    numberArray.shift();
+    recursiva(numberArray);
+  }
+
+}
