@@ -144,25 +144,37 @@ function createStudents({
     
     email,
     age,
-    socialMedia: {
-          x,
-          instagram,
-          facebook,
-    },
     approvedCourses ,
     learningPaths ,
-    readName() {
+    socialMedia: {
+      x,
+      instagram,
+      facebook,
+    },
+
+    get name() {
       return private["_name"];
     },
-    changeName(newName) {
-      private["_name"] = newName;
-    },
+
+    set name(newName) {
+      if (newName.length != 0) {
+        private["_name"] = newName;
+      }else {
+        console.warn("Tu nombre debe tener almenos 1 caracter");
+      };
+    }
+    // readName() {
+    //   return private["_name"];
+    // },
+    // changeName(newName) {
+    //   private["_name"] = newName;
+    // },
   };
 
-  Object.defineProperty(public, "readName", {
-    writable: false,
-    configurable: false,
-  });
+  // Object.defineProperty(public, "readName", {
+  //   writable: false,
+  //   configurable: false,
+  // });
 
   return public;
 }
