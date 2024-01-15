@@ -48,7 +48,7 @@ Object.freeze(Lautaro); //nos impide borrar y editar
 
 console.log(Object.getOwnPropertyDescriptors(Lautaro)); */
 
-const obj1 = {
+/* const obj1 = {
   a: "a",
   b: "b",
   c: {
@@ -58,7 +58,7 @@ const obj1 = {
   editA() {
     this.a = "AAAAA";
   }
-};
+}; */
 
 function isObject(subject) {
   return typeof subject == "object";
@@ -100,6 +100,28 @@ function deepCopy(subject) {
   return copySubject;
 }
 
+const studentsBase = {
+  name: undefined,
+  email: undefined,
+  age: undefined,
+  approvedCourses: undefined,
+  learningPaths: undefined,
+  socialMedia: {
+    X: undefined,
+    instagram: undefined,
+    facebook: undefined,
+  },
+};
+
+const Lautaro = deepCopy(studentsBase);
+Object.seal(Lautaro);
+// Object.isSealed(Lautaro);
+// Object.defineProperty(Lautaro, "name", {
+//   value: "Lautarito",
+//   configurable: false,
+// });
+
+
 /* const stringifiedComplexObj = JSON.stringify(obj1);
 const obj = JSON.parse(obj1);
 console.log(stringifiedComplexObj);
@@ -108,6 +130,7 @@ console.log(obj);
 for (prop in obj1) {
   obj2[prop] = obj1[prop];
 } */
+
 
 /* const obj3 = Object.assign({}, obj1)
 const obj4 = Object.create(obj1) //el objeto se copio dentro de PROTO
