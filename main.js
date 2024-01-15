@@ -60,6 +60,14 @@ console.log(Object.getOwnPropertyDescriptors(Lautaro)); */
   }
 }; */
 
+
+
+
+
+
+
+
+
 function isObject(subject) {
   return typeof subject == "object";
 }
@@ -127,8 +135,13 @@ function createStudents({
   approvedCourses = [],
   learningPaths = [],
 } = {}) {
-  return {
-    name,
+
+  const private = {
+    "_name": name,
+  };
+
+  const public = {
+    
     email,
     age,
     socialMedia: {
@@ -138,7 +151,20 @@ function createStudents({
     },
     approvedCourses ,
     learningPaths ,
-  }
+    readName() {
+      return private["_name"];
+    },
+    changeName(newName) {
+      private["_name"] = newName;
+    },
+  };
+
+  Object.defineProperty(public, "readName", {
+    writable: false,
+    configurable: false,
+  });
+
+  return public;
 }
 
 const Lautaro = createStudents({
@@ -150,6 +176,13 @@ const Lautaro = createStudents({
   facebook: "Lauti Bj",
   approvedCourses:"Curso de las POO"
 }); //{}
+
+
+
+
+
+
+
 
 /* const Lautaro = deepCopy(studentsBase);
 Object.seal(Lautaro); */
