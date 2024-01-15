@@ -1,4 +1,4 @@
-const Lautaro = {
+/* const Lautaro = {
   name: "Lautarito",
   age: 18,
   approvedCourses: ["Curso 1"],
@@ -7,7 +7,7 @@ const Lautaro = {
     console.log("This.approvedCourses", this.approvedCourses);
     this.approvedCourses.push(newCourse);
   }
-}
+} */
 
 /* console.log(Object.keys(Lautaro));
 console.log(Object.getOwnPropertyNames(Lautaro));
@@ -42,8 +42,25 @@ Object.defineProperty(Lautaro, "pruebaNASA", {
   configurable: false,
 }); 
 */
-
+/* 
 Object.seal(Lautaro); //hace el configurable se ponga el falls
 Object.freeze(Lautaro); //nos impide borrar y editar
 
-console.log(Object.getOwnPropertyDescriptors(Lautaro));
+console.log(Object.getOwnPropertyDescriptors(Lautaro)); */
+
+const obj1 = {
+  a: "a",
+  b: "b",
+  c: {
+    d: "d",
+    e: "e",
+  }
+};
+
+const obj2 = {};
+for (prop in obj1) {
+  obj2[prop] = obj1[prop];
+}
+
+const obj3 = Object.assign({}, obj1)
+const obj4 = Object.create(obj1)
